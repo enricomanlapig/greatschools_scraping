@@ -53,17 +53,17 @@ fn_scrape_school_page <- function(my_left_url, my_page_num, my_right_url){
   df_ethnicity_info <- data.frame()
   
   
-  for (i in 1:length(my_df$ethnicityInfo)){
+  for (i in 1:length(my_df$id)){
     
     my_df$ethnicityInfo[[i]] %>% 
       pivot_wider(names_from = label,
                   values_from = setdiff(names(my_df$ethnicityInfo[[i]]), "label"),
                   names_sep = "_") %>%
+      mutate(id = my_df$id[i]) %>% 
       bind_rows(df_ethnicity_info) -> df_ethnicity_info
   }
   
-  my_df <- cbind(my_df, df_ethnicity_info)
-  my_df %>% select(-ethnicityInfo) -> my_df
+  my_df <- left_join(my_df, df_ethnicity_info, by = c("id"))
   
   return(my_df)
 }
@@ -93,11 +93,13 @@ df_schools %>%
          high = ifelse(grepl("h", levelCode),1,0),
          
          percentLowIncome = as.numeric(sub("%", "", percentLowIncome))/100) %>%
+  
   cbind(df_schools$collegeEnrollmentData,
         df_schools$subratings,
         df_schools$remediationData,
         df_schools$links,
         df_schools$address) %>%
+  
   select(
     id,
     district_name = districtName,
@@ -122,6 +124,16 @@ df_schools %>%
     rating_african_american = 'rating_African American',
     rating_amer_indian_alaska_native = 'rating_American Indian/Alaska Native',
     rating_filipino = 'rating_Filipino',
+    
+    percentage_low_income = 'percentage_Low-income',
+    percentage_all_students = 'percentage_All students',
+    percentage_hispanic = 'percentage_Hispanic',
+    percentage_white = 'percentage_White',
+    percentage_asian = 'percentage_Asian',
+    percentage_african_american = 'percentage_African American',
+    percentage_amer_indian_alaska_native = 'percentage_American Indian/Alaska Native',
+    percentage_filipino = 'percentage_Filipino',
+    
     pre_k,
     elementary,
     middle,
@@ -130,6 +142,8 @@ df_schools %>%
     academic_progress_rating = "Academic Progress Rating",
     equity_overview_rating = "Equity Overview Rating",
     college_readiness_rating = "College Readiness Rating",
-    pg_num
+    pg_num,
+    num_reviews = numReviews,
+    ethnicity_info = ethnicityInfo
   ) -> df_schools
 

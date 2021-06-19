@@ -35,13 +35,16 @@ source("scrape_school_lists.R")
 
 
 ```{r construct_review_page_urls}
-school_url_left <- 'https://www.greatschools.org/'
+school_url_left <- 'https://www.greatschools.org'
 
 v_school_url_right <- df_school_list$links$reviews
 
 v_school_url_right <- gsub("#Reviews", "reviews/", v_school_url_right)
 
 v_school_urls <- paste0(school_url_left, v_school_url_right)
+
+v_school_urls <- setdiff(v_school_urls[df_schools$num_reviews > 0], NA)
+
 
 #school_url <- 'https://www.greatschools.org/california/santa-barbara/11279-Crane-Country-Day-School/reviews/'
 ```
@@ -58,7 +61,7 @@ remDr$setWindowSize(width = 1920 / 2, height = 1080)
 
 
 ```{r loop_extract_school_reviews}
-for (s in 1:2) {
+for (s in 1:length(v_school_urls)) {
   school_url <- v_school_urls[s]
   #school_url <- 'https://www.greatschools.org/california/santa-barbara/11279-Crane-Country-Day-School/reviews/'
 
@@ -73,6 +76,7 @@ for (s in 1:2) {
     df_all_school_reviews <- bind_rows(df_all_school_reviews,
                                        df_school_review)
   }
+  Sys.sleep(5)
 }
 ```
 

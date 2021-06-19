@@ -99,14 +99,12 @@ webpage %>%
 
 #### Function to extract topic comments
 
-review_index <-
-  rep(1:length(num_topic_reviews), times = num_topic_reviews)
+review_index <- rep(1:length(num_topic_reviews), times = num_topic_reviews)
 
 fn_extract_topic_comments <- function(my_topic) {
   tmp <- rep(NA, times = length(review_date))
-  tmp[review_index[topic_labels == my_topic]] <-
-    topic_comments[which(topic_labels == my_topic)]
-  return(tmp)
+  tmp[review_index[topic_labels == my_topic]] <- topic_comments[which(topic_labels == my_topic)]
+    return(tmp)
 }
 
 #### Extract topic comments
@@ -161,14 +159,13 @@ webpage %>%
 
 #### Function to extract topic ratings
 
-review_index_ratings <-
-  rep(1:length(num_topic_reviews), times = num_topic_ratings)
+review_index_ratings <- rep(1:length(num_topic_reviews), times = num_topic_ratings)
 
 fn_extract_topic_rating <- function(my_topic) {
   tmp <- rep(NA, times = length(review_date))
   tmp[review_index_ratings[grep(my_topic, topic_rating_label)]] <-
-    topic_rating[grep(my_topic, topic_rating_label)]
-  return(tmp)
+      topic_rating[grep(my_topic, topic_rating_label)]
+    return(tmp)
 }
 
 
