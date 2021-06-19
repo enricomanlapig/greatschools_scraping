@@ -1,0 +1,86 @@
+---
+title: "GreatSchools Scrape"
+author: "Enrico Manlapig"
+date: "6/9/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r libraries}
+library(tidyverse)
+library(rvest)
+library(RSelenium)
+library(V8)
+library(jsonlite)
+library(stringr)
+```
+
+
+# School lists
+```{r school_list_urls}
+school_list_url_left <- "https://www.greatschools.org/california/santa-barbara/schools/?page="
+school_list_url_right <- "&view=table"
+school_list_js_xpath <- "/html/head/script[1]"
+```
+
+# Scrape school lists
+```{r scrape_school_lists}
+num_pages_to_scrape <- 1
+
+source("scrape_school_lists.R")
+```
+
+
+```{r construct_review_page_urls}
+school_url_left <- 'https://www.greatschools.org/'
+
+v_school_url_right <- df_school_list$links$reviews
+
+v_school_url_right <- gsub("#Reviews", "reviews/", v_school_url_right)
+
+v_school_urls <- paste0(school_url_left, v_school_url_right)
+
+#school_url <- 'https://www.greatschools.org/california/santa-barbara/11279-Crane-Country-Day-School/reviews/'
+```
+
+
+```{r, open_selenium_browser}
+rD <- rsDriver(browser = "firefox",
+               verbose = F)
+remDr <- rD[["client"]]
+
+remDr$open()
+remDr$setWindowSize(width = 1920 / 2, height = 1080)
+```
+
+
+```{r loop_extract_school_reviews}
+for (s in 1:2) {
+  school_url <- v_school_urls[s]
+  #school_url <- 'https://www.greatschools.org/california/santa-barbara/11279-Crane-Country-Day-School/reviews/'
+
+  paste("Scraping: ", school_url)
+    
+  source("scrape_school_reviews.R")
+  
+  if (s == 1) {
+
+    df_all_school_reviews <- df_school_review
+  } else{
+    df_all_school_reviews <- bind_rows(df_all_school_reviews,
+                                       df_school_review)
+  }
+}
+```
+
+```{r close_selenium_browser}
+remDr$close()
+rD$server$stop()
+rm(rD)
+```
+
+
+

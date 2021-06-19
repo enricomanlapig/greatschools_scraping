@@ -1,0 +1,512 @@
+webpage %>%
+html_elements("div.user-reviews-container") %>%
+html_element("div.user-list-column") %>%
+html_element("div.five-star-review") %>%
+html_element("div.comment") %>%
+html_text() -> overall_comment
+overall_comment
+webpage %>%
+html_elements("div.user-reviews-container") %>%
+html_element("div.user-list-column") %>%
+html_element("div.five-star-review") %>%
+html_element("div.comment") %>%
+html_text() -> overall_comment
+overall_comment
+webpage %>%
+html_elements("div.user-reviews-container") %>%
+html_element("div.five-star-review") %>%
+html_element("div.comment") %>%
+html_text() -> overall_comment
+overall_comment
+webpage %>%
+html_elements("div.user-reviews-container") %>%
+html_elements("div.topical-review-detail") %>%
+as.character()
+webpage %>%
+html_elements("div.user-reviews-container") %>%
+html_elements("div.topical-review-detail") %>%
+fn_extract_overall_review_element <- function(my_element_name){
+all_elements <- sapply(l_school_reviews$reviews,
+function(l) l[[2]])[paste0(my_element_name),]
+my_element <- unlist(all_elements, use.names = FALSE)
+return(my_element)
+}
+webpage %>%
+html_elements("div.user-reviews-container") %>%
+html_elements("div.topical-review-detail")
+webpage %>%
+html_elements("div.user-reviews-container")
+webpage %>%
+html_elements("div.user-reviews-container") %>%
+html_children("div.topical-review-detail")
+webpage %>%
+html_elements("div.user-reviews-container") %>%
+html_children()
+webpage %>%
+html_elements("div.user-reviews-container") %>%
+html_element("div.topic")
+webpage %>%
+html_elements("div.user-reviews-container") %>%
+html_element("div.topic") %>%
+as.character()
+webpage %>%
+html_elements("div.user-reviews-container") %>%
+html_element("div.topic") %>%
+html_text()
+webpage %>%
+html_elements("div.user-reviews-container") %>%
+html_element("div.topic") %>%
+html_text() %>%
+filter("Homework")
+webpage %>%
+html_elements("div.user-reviews-container") %>%
+html_element("div.topic") %>%
+html_text() %>%
+ifelse("Homework", 1, 0)
+webpage %>%
+html_elements("div.user-reviews-container") %>%
+html_element("div.topic") %>%
+ifelse(str_count("Homework" == 1), 1, 0)
+webpage %>%
+html_elements("div.user-reviews-container") %>%
+html_element("div.topic") %>%
+html_text() %>%
+ifelse(str_count("Homework" == 1), 1, 0)
+webpage %>%
+html_elements("div.user-reviews-container") %>%
+html_element("div.topic") %>%
+html_text() %>%
+ifelse(str_count("Homework" == 1), 1, 0)
+webpage %>%
+html_elements("div.user-reviews-container") %>%
+html_element("div.topic") %>%
+html_text()
+webpage %>%
+html_elements("div.user-reviews-container") %>%
+html_element("div.topic") %>%
+html_text() %>%
+.[!="Homework"]
+webpage %>%
+html_elements("div.user-reviews-container") %>%
+html_element("div.topic") %>%
+html_text() %>%
+ifelse(. != "Homework", 1, 0)
+webpage %>%
+html_elements("div.user-reviews-container") %>%
+as.character() %>%
+str_count('<div class = "topic"')
+webpage %>%
+html_elements("div.user-reviews-container") %>%
+as.character() %>%
+str_count('<div class="topic"')
+webpage %>%
+html_elements("div.topic") %>%
+fn_extract_overall_review_element <- function(my_element_name){
+all_elements <- sapply(l_school_reviews$reviews,
+function(l) l[[2]])[paste0(my_element_name),]
+my_element <- unlist(all_elements, use.names = FALSE)
+return(my_element)
+}
+webpage %>%
+html_elements("div.topic")
+webpage %>%
+html_elements("div.topic") %>%
+html_text()
+matrix(nrow = length(review_date),
+ncol = max(num_topic_reviews))
+webpage %>%
+html_elements("div.user-reviews-container") %>%
+as.character() %>%
+str_count('<div class="topic"') -> num_topic_reviews
+matrix(nrow = length(review_date),
+ncol = max(num_topic_reviews))
+webpage %>%
+html_elements("div.topic") %>%
+html_text() -> topic_labels
+topic_labels
+num_topic_reviews
+unique(topic_labels)
+rep(1:length(num_topic_reviews), times = num_topic_reviews)
+webpage %>%
+html_elements("div.topical-review-detail")
+webpage %>%
+html_elements("div.topical-review-detail") %>%
+html_element("div.comment") %>%
+html_text() -> topic_comments
+topic_comments
+rep(1:length(num_topic_reviews), times = num_topic_reviews)
+topic_labels
+topic_index <- rep(1:length(num_topic_reviews), times = num_topic_reviews)
+topic_index
+rep(NA, times = length(review_date))
+topic_index[topic_labels == "Homework"]
+hw_comments[topic_index[topic_labels == "Homework"]] <- topic_comments[topic_index[topic_labels == "Homework"]]
+hw_comments <- rep(NA, times = length(review_date))
+hw_comments[topic_index[topic_labels == "Homework"]] <- topic_comments[topic_index[topic_labels == "Homework"]]
+hw_comments
+topic_labels
+topic_index
+hw_comments
+review_index[topic_labels == "Homework"]
+topic_comments
+review_index
+review_index <- rep(1:length(num_topic_reviews), times = num_topic_reviews)
+review_index
+topic_labels
+review_index[topic_labels == "Homework"]
+hw_index <- review_index[topic_labels == "Homework"]
+hw_comments[hw_index] <- topic_comments[hw_index]
+hw_comments
+review_index
+which(1:length(num_topic_reviews, "Homework")
+)
+which(1:length(num_topic_reviews), "Homework")
+which(1:length(num_topic_reviews) == "Homework")
+which(topic_labels == "Homework")
+review_index <- rep(1:length(num_topic_reviews), times = num_topic_reviews)
+hw_comments <- rep(NA, times = length(review_date))
+review_index <- review_index[topic_labels == "Homework"]
+hw_comments[hw_index] <- topic_comments[which(topic_labels == "Homework")]
+hw_comments
+review_index <- rep(1:length(num_topic_reviews), times = num_topic_reviews)
+review_index
+review_index <- rep(1:length(num_topic_reviews), times = num_topic_reviews)
+homework_comments <- rep(NA, times = length(review_date))
+homework_comments[review_index[topic_labels == "Homework"]] <- topic_comments[which(topic_labels == "Homework")]
+homework_comments
+vector(length(length(num_topic_reviews)))
+vector(length(num_topic_reviews))
+vector(mode = "any", length(num_topic_reviews))
+vector(NA, length(num_topic_reviews))
+fn_extract_topic_comments <- function(my_topic){
+tmp <- rep(NA, times = length(review_date))
+tmp[review_index[topic_labels == !!my_topic]] <- topic_comments[which(topic_labels == !!my_topic)]
+}
+homework_comments <- fn_extract_topic_comments("Homework")
+fn_extract_topic_comments <- function(my_topic){
+tmp <- rep(NA, times = length(review_date))
+tmp[review_index[topic_labels == my_topic]] <- topic_comments[which(topic_labels == my_topic)]
+}
+homework_comments <- fn_extract_topic_comments("Homework")
+homework_comments
+return(tmp)
+fn_extract_topic_comments <- function(my_topic){
+tmp <- rep(NA, times = length(review_date))
+tmp[review_index[topic_labels == my_topic]] <- topic_comments[which(topic_labels == my_topic)]
+return(tmp)
+}
+homework_comments <- fn_extract_topic_comments("Homework")
+homework_comments
+leadership_comments <- fn_extract_topic_comments("Leadership")
+leadership_comments
+homework_comments <- fn_extract_topic_comments("Homework")
+teacher_comments <- fn_extract_topic_comments("Teachers")
+character_comments <- fn_extract_topic_comments("Character")
+leadership_comments <- fn_extract_topic_comments("Leadership")
+learning_diffs_comments <- fn_extract_topic_comments("Learning Differences")
+learning_diffs_comments
+leadership_comments
+webpage %>%
+html_elements("div.topical-individual individual-review")
+webpage %>%
+html_elements("div.topical-individual")
+webpage %>%
+html_elements("div.topical-review")
+html_elements("div.topical-review individual-review")
+webpage %>%
+html_elements("div.topical-review individual-review")
+webpage %>%
+html_elements("div.'topical-review individual-review'")
+webpage %>%
+html_elements('div."topical-review individual-review"')
+webpage %>%
+html_elements('div."topical-review individual-review"')
+webpage %>%
+html_elements("div.'topical-review individual-review'")
+webpage %>%
+html_elements("div.topical-review individual-review")
+webpage %>%
+html_elements("div.topical-review")
+webpage %>%
+html_elements("div.topical-average")
+webpage %>%
+html_elements("div.topical-average") %>%
+html_elements("div.topical-details") %>%
+html_text() -> topic_rating_label
+topic_rating_label
+webpage %>%
+html_elements("div.topical-average") %>%
+html_element("div.topic-details") %>%
+html_text() -> topic_rating_label
+topic_rating_label
+webpage %>%
+html_elements("div.topical-item")
+webpage %>%
+html_elements("div.topical-item") %>%
+html_element("div.topic-details") %>%
+html_text() -> topic_rating_label
+topic_rating_label
+webpage %>%
+html_elements("div.user-reviews-container") %>%
+as.character() %>%
+str_count('<div class="topic-details"') -> num_topic_ratings
+num_topic_ratings
+sum(num_topic_ratings)
+length(num_topic_ratings)
+webpage %>%
+html_elements("div.user-reviews-container") %>%
+as.character() %>%
+str_count('<div class="topic-item"') -> num_topic_ratings
+num_topic_ratings
+webpage %>%
+html_elements("div.user-reviews-container") %>%
+as.character() %>%
+str_count('<div class="topical-item"') -> num_topic_ratings
+num_topic_ratings
+sum(num_topic_ratings)
+review_index_ratings <- rep(1:length(num_topic_reviews), times = num_topic_ratings)
+review_index_ratings
+fn_extract_topic_comments <- function(my_topic){
+tmp <- rep(NA, times = length(review_date))
+tmp[review_index_ratings[topic_labels == my_topic]] <- topic_rating_label[which(topic_rating_label == my_topic)]
+return(tmp)
+}
+fn_extract_topic_rating <- function(my_topic){
+tmp <- rep(NA, times = length(review_date))
+tmp[review_index_ratings[topic_labels == my_topic]] <- topic_rating_label[which(topic_rating_label == my_topic)]
+return(tmp)
+}
+fn_extract_topic_rating("Homework")
+topic_rating_label
+topic_rating_label
+topic_rating_label
+topic_rating_label
+fn_extract_topic_rating <- function(my_topic){
+tmp <- rep(NA, times = length(review_date))
+tmp[review_index_ratings[topic_rating_label == my_topic]] <- topic_rating_label[which(topic_rating_label == my_topic)]
+return(tmp)
+}
+fn_extract_topic_rating("Homework")
+review_index_ratings
+my_topic <- "Homework"
+tmp <- rep(NA, times = length(review_date))
+tmp
+review_index_ratings[topic_rating_label == my_topic]
+topic_rating_label
+?grep
+grep("Homework", topic_rating_label)
+review_index_ratings
+review_index_ratings[topic_rating_label == my_topic]
+review_index_ratings
+grep("Homework", topic_rating_label)
+review_index_ratings
+my_topic <- "Homework"
+tmp <- rep(NA, times = length(review_date))
+tmp[review_index_ratings[grep("Homework", topic_rating_label)]] <- topic_rating_label[grep("Homework", topic_rating_label)]
+tmp[review_index_ratings[grep("Homework", topic_rating_label)]]
+review_index_ratings[grep("Homework", topic_rating_label)]
+webpage %>%
+html_elements("div.topical-item") %>%
+html_element("div.topic-details") %>%
+html_text() -> topic_rating_label
+topic_rating_label
+grep("(", topic_rating_label)
+grep("\(", topic_rating_label)
+grep("\\(", topic_rating_label)
+webpage %>%
+html_elements("div.topical-item") %>%
+html_element("div.topic-details") %>%
+html_text() %>%
+grep("\\(")
+topic_rating_label <- setdiff(topic_rating_label, grep("\\(", topic_rating_label))
+topic_rating_label
+webpage %>%
+html_elements("div.topical-item") %>%
+html_element("div.topic-details") %>%
+html_text() -> topic_rating_label
+topic_rating_label[-grep("\\(", topic_rating_label)]
+topic_rating_label <- topic_rating_label[-grep("\\(", topic_rating_label)]
+webpage %>%
+html_elements("div.user-reviews-container") %>%
+as.character() %>%
+str_count('<div class="topical-item"') -> num_topic_ratings
+review_index_ratings <- rep(1:length(num_topic_reviews), times = num_topic_ratings)
+fn_extract_topic_rating <- function(my_topic){
+my_topic <- "Homework"
+tmp <- rep(NA, times = length(review_date))
+tmp[review_index_ratings[grep("Homework", topic_rating_label)]] <- topic_rating_label[grep("Homework", topic_rating_label)]
+return(tmp)
+}
+fn_extract_topic_rating("Homework")
+my_topic <- "Homework"
+tmp <- rep(NA, times = length(review_date))
+grep("Homework", topic_rating_label)
+review_index_ratings[grep("Homework", topic_rating_label)]
+tmp[review_index_ratings[grep("Homework", topic_rating_label)]]
+topic_rating_label[grep("Homework", topic_rating_label)]
+fn_extract_topic_rating <- function(my_topic){
+my_topic <- "Homework"
+tmp <- rep(NA, times = length(review_date))
+tmp[review_index_ratings[grep("Homework", topic_rating_label)]] <- topic_rating_label[grep("Homework", topic_rating_label)]
+return(tmp)
+}
+fn_extract_topic_rating("Homework")
+webpage %>%
+html_elements("div.topical-item") %>%
+html_element("div.topical-average")
+webpage %>%
+html_elements("div.topical-item") %>%
+html_element("div.topical-average") %>%
+html_element("div.numeric")
+webpage %>%
+html_elements("div.topical-item") %>%
+html_element("div.topical-average") %>%
+html_element("div.numeric") %>%
+html_text() -> topic_rating
+topic_rating
+webpage %>%
+html_elements("div.topical-item") %>%
+html_element("div.topical-average") %>%
+html_element("div.numeric") %>%
+html_text() %>%
+as.numeric() -> topic_rating
+topic_rating
+fn_extract_topic_rating <- function(my_topic){
+my_topic <- "Homework"
+tmp <- rep(NA, times = length(review_date))
+tmp[review_index_ratings[grep("Homework", topic_rating_label)]] <- topic_rating[grep("Homework", topic_rating_label)]
+return(tmp)
+}
+fn_extract_topic_rating("Homework")
+fn_extract_topic_rating <- function(my_topic){
+tmp <- rep(NA, times = length(review_date))
+tmp[review_index_ratings[grep("Homework", topic_rating_label)]] <- topic_rating[grep("Homework", topic_rating_label)]
+return(tmp)
+}
+hw_rating <- fn_extract_topic_rating("Homework")
+hw_rating
+library(RSelenium)
+library(rvest)
+#start RSelenium
+rD <- rsDriver(browser="firefox", port=4545L, verbose=F)
+remDr <- rD[["client"]]
+remDr$open()
+remDr$setWindowSize(width = 1920/2, height = 1080)
+#navigate to your page
+remDr$navigate("https://www.greatschools.org/california/santa-barbara/11279-Crane-Country-Day-School/reviews/")
+#scroll down waiting for the page to load at each time
+while(length(remDr$findElements("link text", "More") ) != 0){
+print(length(remDr$findElements("link text", "More") ))
+remDr$findElements("link text", "More")[[1]]$clickElement()
+remDr$executeScript(paste("scroll(0,",i*1080,");"))
+Sys.sleep(1)
+}
+#get the page html
+webpage <- read_html(remDr$getPageSource()[[1]])
+webpage %>%
+html_elements("div.user-reviews-container") %>%
+html_element("div.five-star-review") %>%
+html_element("div.comment") %>%
+html_text() -> overall_comment
+webpage %>%
+html_elements("div.user-reviews-container") %>%
+html_element("div.answer") %>%
+as.character() %>%
+str_count("filled-star") -> overall_rating
+webpage %>%
+html_elements("div.user-reviews-container") %>%
+html_element("div.user-type") %>%
+html_text() -> review_type
+webpage %>%
+html_elements("div.user-reviews-container") %>%
+html_element("div.type-and-date") %>%
+html_text() %>%
+as.Date("%B %d, %Y") -> review_date
+webpage %>%
+html_elements("div.user-reviews-container") %>%
+as.character() %>%
+str_count('<div class="topic"') -> num_topic_reviews
+webpage %>%
+html_elements("div.topic") %>%
+html_text() -> topic_labels
+webpage %>%
+html_elements("div.topical-review-detail") %>%
+html_element("div.comment") %>%
+html_text() -> topic_comments
+### Function to extract topic comments
+fn_extract_topic_comments <- function(my_topic){
+tmp <- rep(NA, times = length(review_date))
+tmp[review_index[topic_labels == my_topic]] <- topic_comments[which(topic_labels == my_topic)]
+return(tmp)
+}
+homework_comments <- fn_extract_topic_comments("Homework")
+teacher_comments <- fn_extract_topic_comments("Teachers")
+character_comments <- fn_extract_topic_comments("Character")
+leadership_comments <- fn_extract_topic_comments("Leadership")
+bullying_comments <- fn_extract_topic_comments("Bullying")
+learning_diffs_comments <- fn_extract_topic_comments("Learning Differences")
+webpage %>%
+html_elements("div.topical-item") %>%
+html_element("div.topic-details") %>%
+html_text() -> topic_rating_label
+topic_rating_label <- topic_rating_label[-grep("\\(", topic_rating_label)]
+webpage %>%
+html_elements("div.topical-item") %>%
+html_element("div.topical-average") %>%
+html_element("div.numeric") %>%
+html_text() %>%
+as.numeric() -> topic_rating
+webpage %>%
+html_elements("div.user-reviews-container") %>%
+as.character() %>%
+str_count('<div class="topical-item"') -> num_topic_ratings
+webpage %>%
+html_elements("div.user-reviews-container") %>%
+as.character() %>%
+str_count('<div class="topical-item"') -> num_topic_ratings
+review_index_ratings <- rep(1:length(num_topic_reviews), times = num_topic_ratings)
+### Function to extract topic ratings
+fn_extract_topic_rating <- function(my_topic){
+tmp <- rep(NA, times = length(review_date))
+tmp[review_index_ratings[grep("Homework", topic_rating_label)]] <- topic_rating[grep("Homework", topic_rating_label)]
+return(tmp)
+}
+homework_rating <- fn_extract_topic_rating("Homework")
+teacher_rating <- fn_extract_topic_rating("Teachers")
+character_rating <- fn_extract_topic_rating("Character")
+leadership_rating <- fn_extract_topic_rating("Leadership")
+bullying_rating <- fn_extract_topic_rating("Bullying")
+learning_diffs_rating <- fn_extract_topic_rating("Learning Differences")
+fn_extract_overall_review_element <- function(my_element_name){
+all_elements <- sapply(l_school_reviews$reviews,
+function(l) l[[2]])[paste0(my_element_name),]
+my_element <- unlist(all_elements, use.names = FALSE)
+return(my_element)
+}
+### Extract overall review elements
+fn_extract_overall_review_element("topic_label")
+date_published <- as.Date(fn_extract_overall_review_element("date_published"), "%B %d, %Y")
+school_id <- fn_extract_overall_review_element("school_id")
+print(school_id)
+overall_exp_rating <- as.numeric(
+fn_extract_overall_review_element("answer_value"))
+overall_exp_comments <- fn_extract_overall_review_element("comment")
+learning_diffs_rating
+bullying_rating
+leadership_rating
+character_rating
+fn_extract_topic_rating <- function(my_topic){
+tmp <- rep(NA, times = length(review_date))
+tmp[review_index_ratings[grep(my_topic, topic_rating_label)]] <- topic_rating[grep(my_topic, topic_rating_label)]
+return(tmp)
+}
+homework_rating <- fn_extract_topic_rating("Homework")
+teacher_rating <- fn_extract_topic_rating("Teachers")
+character_rating <- fn_extract_topic_rating("Character")
+leadership_rating <- fn_extract_topic_rating("Leadership")
+bullying_rating <- fn_extract_topic_rating("Bullying")
+learning_diffs_rating <- fn_extract_topic_rating("Learning Differences")
+learning_diffs_rating
+bullying_rating
+leadership_rating
+character_rating
