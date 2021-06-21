@@ -20,24 +20,49 @@ library(stringr)
 
 
 # School lists
-```{r school_list_urls}
-school_list_url_left <- "https://www.greatschools.org/california/santa-barbara/schools/?page="
+```{r location_inputs}
+state_name <- "california"
+city_name <- "santa barbara"
+```
+
+
+```{r create_school_list_urls}
+city_name <- gsub(" ", "-", city_name)
+
+school_list_url_left <- paste0("https://www.greatschools.org/",
+                              state_name,
+                              "/",
+                              city_name,
+                              "/schools/?page=",
+                              sep = "")
+
+#school_list_url_left <- "https://www.greatschools.org/california/santa-barbara/schools/?page="
+
 school_list_url_right <- "&view=table"
+
 school_list_js_xpath <- "/html/head/script[1]"
 ```
 
 # Scrape school lists
 ```{r scrape_school_lists}
-num_pages_to_scrape <- 1
+num_pages_to_scrape <- 5 # Check this by visiting the city page
 
 source("scrape_school_lists.R")
+
+
 ```
+
+```{r save_list}
+school_list_outfile <- paste0(city_name, "_list.RData", sep = "")
+save(df_schools, file = school_list_outfile)
+```
+
 
 
 ```{r construct_review_page_urls}
 school_url_left <- 'https://www.greatschools.org'
 
-v_school_url_right <- df_school_list$links$reviews
+v_school_url_right <- df_schools$links_reviews
 
 v_school_url_right <- gsub("#Reviews", "reviews/", v_school_url_right)
 
@@ -87,4 +112,7 @@ rm(rD)
 ```
 
 
+```{r save_reviews}
+school_reviews_outfile <- paste(city_name, "_reviews.RData")
+```
 

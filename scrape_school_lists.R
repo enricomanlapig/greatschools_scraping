@@ -58,6 +58,7 @@ fn_scrape_school_page <- function(my_left_url, my_page_num, my_right_url){
     my_df$ethnicityInfo[[i]] %>% 
       pivot_wider(names_from = label,
                   values_from = setdiff(names(my_df$ethnicityInfo[[i]]), "label"),
+                  names_glue = "{.value}_{label}",
                   names_sep = "_") %>%
       mutate(id = my_df$id[i]) %>% 
       bind_rows(df_ethnicity_info) -> df_ethnicity_info
@@ -71,6 +72,9 @@ fn_scrape_school_page <- function(my_left_url, my_page_num, my_right_url){
 
 
 ## Scrape school list
+
+df_schools <- 
+
 
 df_schools <- data.frame()
 
@@ -90,10 +94,8 @@ df_schools %>%
   mutate(pre_k = ifelse(grepl("p", levelCode),1,0),
          elementary = ifelse(grepl("e", levelCode),1,0),
          middle = ifelse(grepl("m", levelCode),1,0),
-         high = ifelse(grepl("h", levelCode),1,0),
+         high = ifelse(grepl("h", levelCode),1,0)) %>%
          
-         percentLowIncome = as.numeric(sub("%", "", percentLowIncome))/100) %>%
-  
   cbind(df_schools$collegeEnrollmentData,
         df_schools$subratings,
         df_schools$remediationData,
@@ -112,10 +114,14 @@ df_schools %>%
     street2,
     city,
     zip,
-    links,
-    percent_low_income = percentLowIncome,
+    
+    links_reviews = reviews,
+    links_profile = profile,
+    links_college = collegeSuccess,
+
     enrollment,
     students_per_teacher = studentsPerTeacher,
+    
     rating_low_income = 'rating_Low-income',
     rating_all_students = 'rating_All students',
     rating_hispanic = 'rating_Hispanic',
@@ -134,6 +140,10 @@ df_schools %>%
     percentage_amer_indian_alaska_native = 'percentage_American Indian/Alaska Native',
     percentage_filipino = 'percentage_Filipino',
     
+    rating,
+    rating_scale = "ratingScale",
+    
+    school_type = schoolType,
     pre_k,
     elementary,
     middle,
@@ -142,8 +152,10 @@ df_schools %>%
     academic_progress_rating = "Academic Progress Rating",
     equity_overview_rating = "Equity Overview Rating",
     college_readiness_rating = "College Readiness Rating",
-    pg_num,
+    
     num_reviews = numReviews,
-    ethnicity_info = ethnicityInfo
+
+    pg_num
+    
   ) -> df_schools
 
