@@ -24,7 +24,7 @@ remDr$navigate(school_url)
 ### expand reviews by clicking on "more" links
 
 while (length(remDr$findElements("link text", "More")) != 0) {
-  print(length(remDr$findElements("link text", "More")))
+  print(paste("Found", length(remDr$findElements("link text", "More")), "link(s) to click. Clicking and scrolling!"))
   remDr$findElements("link text", "More")[[1]]$clickElement()
   remDr$executeScript(paste("scroll(0,", i * 1080, ");"))
   Sys.sleep(1)
