@@ -48,49 +48,47 @@ webpage <- read_html(remDr$getPageSource()[[1]])
 ### Extract global elements
 
 webpage %>%
-  html_elements("div.static-container") %>%
-  html_element("div.container") %>%
-  html_element("a") %>%
+  html_elements(".community-breadcrumbs a") %>%
   html_text() -> school_name
 
 
 webpage %>%
-  html_elements("div.user-reviews-container") %>%
-  html_element("div.five-star-review") %>%
+  html_elements("div.review-item-container") -> review_container
+
+review_container %>%
+  html_element("div.user-type") %>%
+  html_text() -> user_type
+
+
+review_container %>%
   html_element("div.comment") %>%
   html_text() -> overall_comments
 
-webpage %>%
-  html_elements("div.user-reviews-container") %>%
+review_container %>%
   html_element("div.answer") %>%
   as.character() %>%
   str_count("filled-star") -> overall_rating
 
-webpage %>%
-  html_elements("div.user-reviews-container") %>%
-  html_element("div.user-type") %>%
-  html_text() -> review_type
-
-webpage %>%
-  html_elements("div.user-reviews-container") %>%
+review_container %>%
   html_element("div.type-and-date") %>%
   html_text() %>%
   as.Date("%B %d, %Y") -> review_date
 
 
 
+
+
 ### Extract topic reviews
 
-webpage %>%
-  html_elements("div.user-reviews-container") %>%
-  as.character() %>%
-  str_count('<div class="topic"') -> num_topic_reviews
+review_container %>%
+  html_elements("div.topic") %>%
+  length() -> num_topic_reviews
 
-webpage %>%
+review_container %>%
   html_elements("div.topic") %>%
   html_text() -> topic_labels
 
-webpage %>%
+review_container %>%
   html_elements("div.topical-review-detail") %>%
   html_element("div.comment") %>%
   html_text() -> topic_comments
@@ -125,28 +123,22 @@ learning_diffs_comments <- fn_extract_topic_comments("Learning Differences")
 ### Topic ratings
 
 
-webpage %>%
+review_container %>%
   html_elements("div.topical-item") %>%
   html_element("div.topic-details") %>%
   html_text() -> topic_rating_label
 
-topic_rating_label <-
-  topic_rating_label[-grep("\\(", topic_rating_label)]
-
-webpage %>%
+review_container %>%
   html_elements("div.topical-item") %>%
   html_element("div.topical-average") %>%
   html_element("div.numeric") %>%
   html_text() %>%
   as.numeric() -> topic_rating
 
-webpage %>%
-  html_elements("div.user-reviews-container") %>%
-  as.character() %>%
+review_container %>%  
   str_count('<div class="topical-item"') -> num_topic_ratings
 
 webpage %>%
-  html_elements("div.user-reviews-container") %>%
   as.character() %>%
   str_count('<div class="topical-item"') -> num_topic_ratings
 
