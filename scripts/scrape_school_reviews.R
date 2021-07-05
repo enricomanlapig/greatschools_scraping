@@ -70,7 +70,7 @@ review_container %>%
   str_count("filled-star") -> overall_rating
 
 review_container %>%
-  html_element("div.type-and-date") %>%
+  html_element("span.type-and-date") %>%
   html_text() %>%
   as.Date("%B %d, %Y") -> review_date
 
@@ -178,7 +178,7 @@ learning_diffs_rating <- fn_extract_topic_rating("Learning Differences")
 
 df_school_review <- data.frame(
   school_name,
-  review_type,
+  user_type,
   review_date,
   overall_rating,
   overall_comments,

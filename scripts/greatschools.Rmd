@@ -25,7 +25,7 @@ library(snakecase)
 state_name <- "california"
 
 #city_name <- "santa barbara" # 5 pages
-city_name <- "goleta" # 2 pages
+#city_name <- "goleta" # 2 pages
 #city_name <- "summerland" # 1 page
 #city_name <- "montecito" # 1 page
 #city_name <- "carpinteria" # 1 page
@@ -33,7 +33,7 @@ city_name <- "goleta" # 2 pages
 #city_name <- "ventura" # 4 page
 #city_name <- "santa-ynez" # 1 page
 #city_name <- "solvang" # 1 pages
-#city_name <- "buellton" # 1 pages
+city_name <- "buellton" # 1 pages
 ```
 
 
@@ -56,7 +56,7 @@ school_list_js_xpath <- "/html/head/script[1]"
 
 # Scrape school lists
 ```{r scrape_school_lists}
-num_pages_to_scrape <- 2 # Check this by visiting the city page
+num_pages_to_scrape <- 1 # Check this by visiting the city page
 
 source("scrape_school_lists.R")
 
