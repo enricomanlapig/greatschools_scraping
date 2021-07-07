@@ -117,7 +117,7 @@ for (s in 1:length(v_school_urls)) {
 remDr$close()
 rD$server$stop()
 rm(rD)
-system("taskkill /im java.exe /f", intern=FALSE, ignore.stdout=FALSE)
+#system("taskkill /im java.exe /f", intern=FALSE, ignore.stdout=FALSE)
 ```
 
 

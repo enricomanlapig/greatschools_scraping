@@ -8,7 +8,7 @@ library(rvest)
 library(V8)
 library(jsonlite)
 library(snakecase)
-
+library(polite)
 
 ## URLS
 
@@ -26,7 +26,10 @@ fn_scrape_school_page <- function(my_left_url, my_page_num, my_right_url){
   
   url <- paste(my_left_url, my_page_num, my_right_url, sep = "")
   
-  read_html(url) %>%
+  current_page <- nod(session, url) %>% scrape(verbose = FALSE)
+
+  current_page %>%
+#  read_html(url) %>%
     html_element(xpath = school_list_js_xpath) %>%
     html_text(trim = TRUE) %>%
     str_replace(fixed("window.gon"), "gon") -> txt
@@ -47,9 +50,12 @@ fn_scrape_school_page <- function(my_left_url, my_page_num, my_right_url){
   
   ctx$eval(txt2[2])
   l_school_reviews <- ctx$get("gon")
-  
-  my_df <- data.frame(l_school_reviews$search$schools, pg_num = my_page_num)
-  
+
+  total_pages <- l_school_reviews$search$totalPages
+
+  my_df <- data.frame(l_school_reviews$search$schools, 
+                      pg_num = my_page_num, 
+                      tot_pages = total_pages)
   
   df_ethnicity_info <- data.frame()
   
@@ -73,17 +79,27 @@ fn_scrape_school_page <- function(my_left_url, my_page_num, my_right_url){
 
 ## Scrape school list
 
-df_schools <- 
+
 
 
 df_schools <- data.frame()
 
-for (i in 1:num_pages_to_scrape){
+page_to_scrape <- 1
+total_pages <- 2
+
+while (page_to_scrape <= total_pages){
   
-  print(paste("Scraping page", i))
+  print(paste("Scraping page", page_to_scrape))
   
-  df_schools <- bind_rows(df_schools, fn_scrape_school_page(school_list_url_left, i, school_list_url_right))
-  Sys.sleep(5)
+  df_schools <- bind_rows(df_schools, 
+                          fn_scrape_school_page(school_list_url_left, 
+                                                page_to_scrape, 
+                                                school_list_url_right))
+  
+  page_to_scrape <- page_to_scrape + 1
+  total_pages <- max(df_schools$tot_pages)
+  
+  
 }
 
 

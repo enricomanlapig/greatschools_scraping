@@ -9,6 +9,7 @@ library(stringr)
 
 
 
+
 ## Setting up page to scrape
 
 ### URL
@@ -17,6 +18,7 @@ library(stringr)
 
 
 ### Navigate to page
+
 remDr$navigate(school_url)
 
 
@@ -135,7 +137,8 @@ review_container %>%
   html_text() %>%
   as.numeric() -> topic_rating
 
-review_container %>%  
+review_container %>% 
+  as.character() %>%
   str_count('<div class="topical-item"') -> num_topic_ratings
 
 webpage %>%
@@ -177,7 +180,7 @@ learning_diffs_rating <- fn_extract_topic_rating("Learning Differences")
 ## Combine everything together in data frame
 
 df_school_review <- data.frame(
-  school_name,
+  rep(school_name, times = length(user_type)),
   user_type,
   review_date,
   overall_rating,
