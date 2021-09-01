@@ -28,8 +28,8 @@ remDr$navigate(school_url)
 while (length(remDr$findElements("link text", "More")) != 0) {
   print(paste("Found", length(remDr$findElements("link text", "More")), "link(s) to click. Clicking and scrolling!"))
   remDr$findElements("link text", "More")[[1]]$clickElement()
-  remDr$executeScript(paste("scroll(0,", i * 1080, ");"))
-  Sys.sleep(1)
+  remDr$executeScript(paste("scroll(0,", 1080, ");"))
+  Sys.sleep(5)
 }
 
 

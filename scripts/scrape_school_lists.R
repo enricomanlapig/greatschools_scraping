@@ -99,7 +99,7 @@ while (page_to_scrape <= total_pages){
   page_to_scrape <- page_to_scrape + 1
   total_pages <- max(df_schools$tot_pages)
   
-  
+  Sys.sleep(5)
 }
 
 
@@ -119,63 +119,3 @@ df_schools %>%
         df_schools$address) -> df_schools
 
 names(df_schools) <- to_any_case(names(df_schools), case = "snake")
-
-#names(df_schools) <- gsub(names(df_schools), "-", "_")
-#names(df_schools) <- gsub(names(df_schools), " ", "_")
-  # select(
-  #   id,
-  #   district_name = districtName,
-  #   district_city = districtCity,
-  #   lat,
-  #   lon,
-  #   school_name = name,
-  #   address,
-  #   street1,
-  #   street2,
-  #   city,
-  #   zip,
-  #   
-  #   links_reviews = reviews,
-  #   links_profile = profile,
-  #   links_college = collegeSuccess,
-  # 
-  #   enrollment,
-  #   students_per_teacher = studentsPerTeacher,
-  #   
-  #   rating_low_income = 'rating_Low-income',
-  #   rating_all_students = 'rating_All students',
-  #   rating_hispanic = 'rating_Hispanic',
-  #   rating_white = 'rating_White',
-  #   rating_asian = 'rating_Asian',
-  #   rating_african_american = 'rating_African American',
-  #   rating_amer_indian_alaska_native = 'rating_American Indian/Alaska Native',
-  #   rating_filipino = 'rating_Filipino',
-  #   
-  #   percentage_low_income = 'percentage_Low-income',
-  #   percentage_all_students = 'percentage_All students',
-  #   percentage_hispanic = 'percentage_Hispanic',
-  #   percentage_white = 'percentage_White',
-  #   percentage_asian = 'percentage_Asian',
-  #   percentage_african_american = 'percentage_African American',
-  #   percentage_amer_indian_alaska_native = 'percentage_American Indian/Alaska Native',
-  #   percentage_filipino = 'percentage_Filipino',
-  #   
-  #   rating,
-  #   rating_scale = "ratingScale",
-  #   
-  #   school_type = schoolType,
-  #   pre_k,
-  #   elementary,
-  #   middle,
-  #   high,
-  #   test_scores_rating = "Test Scores Rating",
-  #   academic_progress_rating = "Academic Progress Rating",
-  #   equity_overview_rating = "Equity Overview Rating",
-  #   college_readiness_rating = "College Readiness Rating",
-  #   
-  #   num_reviews = numReviews,
-  # 
-  #   pg_num
-    
-  #   ) -> df_schools
-

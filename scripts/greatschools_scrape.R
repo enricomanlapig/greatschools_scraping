@@ -39,6 +39,7 @@ city_name <- gsub(" ", "-", city_name)
 great_schools_url <- "https://www.greatschools.org"
 
 school_list_url_left <- paste0(great_schools_url,
+                               "/",
                                to_snake_case(state_name, sep_out = "-"),
                                "/",
                                to_snake_case(city_name, sep_out = "-"),
@@ -110,7 +111,7 @@ for (s in 1:length(v_school_urls)) {
   }
     # Combine review dataframes
   
-  #Sys.sleep(5)
+  
   
 }
 
