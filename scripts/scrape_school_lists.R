@@ -3,12 +3,12 @@
 
 ## URLS
 
-library(tidyverse)
-library(rvest)
-library(V8)
-library(jsonlite)
-library(snakecase)
-library(polite)
+#library(tidyverse)
+#library(rvest)
+#library(V8)
+#library(jsonlite)
+#library(snakecase)
+#library(polite)
 
 ## URLS
 

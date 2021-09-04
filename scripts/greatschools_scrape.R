@@ -8,7 +8,7 @@ library(rvest) # For scraping finite scroll pages
 library(RSelenium) # For infinite scroll pages
 library(V8) # For evaluating JavaScript
 library(jsonlite) # For working with JSON
-#library(stringr) # For str_replace
+library(stringr) # For str_replace
 library(snakecase) # For converting strings
 library(polite) # For respecting host rules
 
